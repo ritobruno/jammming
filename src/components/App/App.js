@@ -5,11 +5,30 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state.searchResults = [
-      {name},
-      {artist},
-      {album}
-    ];
+    this.state = {
+      searchResults: [{name},{artist},{album}],
+      playlistName: "BR Playlist",
+      playlistTracks: [
+        {name: "coiso"},
+        {artist: "Marco Paulo"},
+        {album: "Siga"}
+      ]
+    };
+    this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
+
+  }
+
+  addTrack(track){
+    if(this.state.playlistTracks.indexOf(track) === -1){
+      this.setState({playlistTracks: this.state.playlist.concat(track)});
+    }
+  }
+
+  removeTrack(track){
+    let tracks = this.state.playlistTracks;
+    tracks = tracks.filter(currentTrack => track.id != currentTrack.id);
+    this.setState({playlistTracks: tracks});
   }
 
   render() {
@@ -17,10 +36,10 @@ class App extends Component {
     <div>
       <h1>Ja<span className="highlight">mmm</span>ing</h1>
       <div className="App">
-        <!-- Add a SearchBar component -->
+        <SearchBar />
         <div className="App-playlist">
-          <SearchResults searchResults={this.state.searchResults} />
-          <!-- Add a Playlist component -->
+          <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
+          <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack}/>
         </div>
       </div>
     </div>

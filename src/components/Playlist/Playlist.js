@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Playlist.css';
 
 import TrackList from '../TrackList/TrackList.js';
@@ -6,7 +6,7 @@ import TrackList from '../TrackList/TrackList.js';
 class Playlist extends Component{
   constructor(props) {
     super(props);
-    this.onNameChange = this.onNameChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
   }
 
   handleNameChange(e){

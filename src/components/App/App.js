@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import Spotify from '../../util/Spotify';
+import Playlist from '../Playlist/Playlist';
+import SearchResults from '../SearchResults/SearchResults';
+import SearchBar from '../SearchBar/SearchBar';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: [{name},{artist},{album}],
+      searchResults: [],
       playlistName: "BR Playlist",
-      playlistTracks: [
-        {name: "coiso"},
-        {artist: "Marco Paulo"},
-        {album: "Siga"}
-      ]
+      playlistTracks: []
     };
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -22,16 +21,18 @@ class App extends Component {
     this.search = this.search.bind(this);
   }
 
-  addTrack(track){
-    if(this.state.playlistTracks.indexOf(track) === -1){
-      this.setState({playlistTracks: this.state.playlist.concat(track)});
+  addTrack(track) {
+    let updatedplaylist = this.state.playlistTracks;
+    if (this.state.playlistTracks.indexOf(track) === -1) {
+      updatedplaylist.push(track);
+      this.setState({ playlistTracks: updatedplaylist });
     }
   }
 
   removeTrack(track){
     let tracks = this.state.playlistTracks;
     //the filter updates the array leaving out the removed tracks
-    tracks = tracks.filter(currentTrack => track.id != currentTrack.id);
+    tracks = tracks.filter(currentTrack => track.id !== currentTrack.id);
     this.setState({playlistTracks: tracks});
   }
 

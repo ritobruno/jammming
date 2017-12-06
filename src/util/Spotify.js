@@ -3,7 +3,7 @@ let accessToken;
 const client_id = '80738a55c7a64e768b0a959a825d15ad';
 const redirect_uri = 'http://jammming.com/callback';
 
-let Spotify {
+let Spotify = {
   getAccessToken(){
 
     if(accessToken){
@@ -21,13 +21,14 @@ let Spotify {
       return accessToken;
     }
     else {
-      let accessUrl = 'https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&scope=playlist-modify-public&show_dialog=true&redirect_uri=${redirect_uri}';
+      let accessUrl = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&scope=playlist-modify-public&show_dialog=true&redirect_uri=${redirect_uri}`;
       window.location = accessUrl;
       }
-  }
+  },
 
   search(searchTerm){
-    return fetch('https://cors-anywhere.herokuapp.com/' + 'https://api.spotify.com/v1/search?type=track&q=${searchTerm}',
+    const accessToken = Spotify.getAccessToken();
+    return fetch(`https://cors-anywhere.herokuapp.com/https://api.spotify.com/v1/search?type=track&q=${searchTerm}`,
     {
       headers: {Authorization: `Bearer ${accessToken}`}
     }).then(response => {return response.json();}).then(jsonResponse => {
@@ -46,7 +47,7 @@ let Spotify {
                 return [];
             }
           });
-  }
+  },
 
   savePlaylist(playlistName, trackURIs){
     if (!(playlistName && trackURIs)) {
@@ -54,7 +55,7 @@ let Spotify {
         }
         const headers = {'Authorization': 'Bearer ' + accessToken};
             let userId;
-            fetch('https://cors-anywhere.herokuapp.com/' + 'https://api.spotify.com/v1/me', {headers: headers})
+            fetch('https://cors-anywhere.herokuapp.com/https://api.spotify.com/v1/me', {headers: headers})
                 .then(response => {
                     return response.json();
                 }).then(jsonResponse => {
@@ -85,7 +86,7 @@ let Spotify {
 
             })
         }
-    
+
 }
 
 

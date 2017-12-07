@@ -9,7 +9,7 @@ class SearchBar extends Component {
   }
 
   search(){
-    if(this.searchTerm) {
+    if(this.state.searchTerm) {
       this.props.onSearch(this.state.searchTerm);
     }
     console.log('Searching...')

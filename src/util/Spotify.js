@@ -1,7 +1,7 @@
 let accessToken;
 
 const client_id = '80738a55c7a64e768b0a959a825d15ad';
-const redirect_uri = 'http://jammming.com/callback';
+const redirect_uri = 'http://localhost:3000/';
 
 let Spotify = {
   getAccessToken(){

@@ -4,7 +4,7 @@ class Preloader extends Component {
   render() {
     return(
       <div className="preloader" >
-        <p></p>
+        <p>....</p>
 
       </div>
 

@@ -6,6 +6,7 @@ class Track extends Component {
     super(props);
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
+    this.renderAction = this.renderAction.bind(this);
   }
 
   renderAction(){
@@ -32,7 +33,7 @@ class Track extends Component {
           <h3>{this.props.track.name}</h3>
           <p>{this.props.track.artist} | {this.props.track.album}</p>
         </div>
-        <a className="Track-action">aa</a>
+        {this.renderAction()}
       </div>
 
     );
